@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "React Expense Tracker",
+  "version": "1.0",
+  "description": "A simple expense tracker built with React.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "React Expense Tracker",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
