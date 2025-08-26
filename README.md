@@ -1,90 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import './ExpenseTracker.css';
+# 💸 Expense Tracker – Browser Extension (React + CSS))
 
-const App = () => {
-  // Initialize state with data from localStorage
-  const [expenses, setExpenses] = useState(() => {
-    const savedExpenses = localStorage.getItem('expenses');
-    return savedExpenses ? JSON.parse(savedExpenses) : [];
-  });
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+Expense Tracker is a lightweight and simple browser extension built with React that lets users quickly add, view, and manage expenses directly inside their browser.  
+It uses `localStorage` for data persistence so your expenses remain saved even after closing the browser.
 
-  // Use a useEffect hook to save expenses to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-  }, [expenses]);
+---
 
-  const handleAddExpense = (e) => {
-    e.preventDefault();
+## ✨ Features
 
-    if (!description || !amount) {
-      alert('Please enter a description and amount.');
-      return;
-    }
+- ➕ Add new expenses with description and amount  
+- 🗑 Delete individual expenses  
+- 📊 View total expenses in real-time  
+- 💾 Persistent `localStorage` storage  
+- 🖥 Clean and responsive UI 
 
-    const newExpense = {
-      id: Date.now(),
-      description: description,
-      amount: parseFloat(amount),
-      date: new Date().toLocaleDateString(),
-    };
+---
 
-    setExpenses([newExpense,...expenses]);
-    setDescription('');
-    setAmount('');
-  };
+## 🚀 Getting Started
 
-  const handleDeleteExpense = (id) => {
-    setExpenses(expenses.filter(expense => expense.id !== id));
-  };
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/todolist-extension.git
+cd todolist-extension
 
-  return (
-    <div className="expense-tracker-container">
-      <h2>💸 Expense Tracker</h2>
-      <form onSubmit={handleAddExpense} className="expense-form">
-        <input
-          type="text"
-          placeholder="Expense Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button type="submit">Add Expense</button>
-      </form>
+```
+### 2. Install Node Modules
+Make sure you have Node.js installed.
 
-      <div className="expenses-list-container">
-        <h3>📝 Expenses List</h3>
-        {expenses.length === 0 ? (
-          <p>No expenses added yet.</p>
-        ) : (
-          <ul className="expenses-list">
-            {expenses.map((expense) => (
-              <li key={expense.id} className="expense-item">
-                <div>
-                  <span className="expense-date">{expense.date}</span>
-                  <span className="expense-description">{expense.description}</span>
-                  <span className="expense-amount">₹{expense.amount.toFixed(2)}</span>
-                </div>
-                <button onClick={() => handleDeleteExpense(expense.id)}>❌</button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+Then install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
 
-      <div className="total-expenses">
-        <h3>📊 Total Expenses:
-          <span>₹{expenses.reduce((total, expense) => total + expense.amount, 0).toFixed(2)}</span>
-        </h3>
-      </div>
-    </div>
-  );
-};
+### 3. 💻 Run the Project in Development
+To run the React app locally:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+This will start the app on http://localhost:5173 by default (if you're using Vite).
 
-export default App;
+### 4. 📦 Build for Production
+To generate a production build (for deployment or Chrome extension packaging):
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
+This will generate a dist/ folder containing the build output.
+
+### 5. 🧩 Load as Chrome/Brave Extension
+To load the extension in Chrome or Brave, follow these steps:
+1. Go to chrome://extensions/ (or brave://extensions/ for Brave).
+2. Enable Developer Mode.
+3. Click "Load unpacked".
+4. Select the dist/ folder.
+5. The extension should now be loaded and visible in the browser.
+6. You can also load the extension directly from the `manifest.json` file by clicking the "Load unpacked" button and selecting the `manifest.json` file.
+7. To update the extension, simply reload the extension by clicking the reload button in the extensions pag
+8. To remove the extension, click the "Remove" button in the extensions page.
+9. To load the extension in a different browser, follow the same steps as above.
+
+## 📁 Folder Structure
+The project follows a standard structure:
+
+``` bash
+src/
+public/
+  ├── preview.png       # Extension preview image (screenshot of popup)
+  ├── manifest.json     # Extension manifest file
+src/
+  ├── App.js            # Main React component
+  ├── ExpenseTracker.css# Styles
+  ├── index.js          # Entry point
+```
+## 📌 Notes
+1. The extension uses localStorage for persistence (data remains after refresh or restart).
+2. Works seamlessly in Chrome, Brave, and Edge (any Chromium-based browser).
+3. Reload the extension from the Extensions page after making code changes and rebuilding.
+
+## 🧠 Tech Stack
+1. React
+2. CSS
+3. Vite
+4. HTML5 LocalStorage
+5. Chrome Extension APIs
+
+## 📸 Screenshot
+
+Here’s a preview of the extension in action:
+
+![ Expense Tracker Screenshot](https://github.com/hellman53/ExpenseTracker/blob/df9962971c50588a67e4517391336f48ab2f6788/public/preview.png)
