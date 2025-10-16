@@ -89,7 +89,7 @@ src/
 
 ## 🧠 Tech Stack
 1. React
-2. CSS
+2. Tailwind CSS
 3. Vite
 4. HTML5 LocalStorage
 5. Chrome Extension APIs
